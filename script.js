@@ -55,19 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   revealTargets.forEach(el => revealObserver.observe(el));
 
-  /* ============ Skill bar fill animation ============ */
-  const skillFills = document.querySelectorAll('.skill-bar__fill');
-  const skillObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
-        skillObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.4 });
-
-  skillFills.forEach(el => skillObserver.observe(el));
-
   /* ============ Animated stat counters ============ */
   const statNums = document.querySelectorAll('.stat__num');
   const animateCount = (el) => {
@@ -124,5 +111,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ============ Footer year ============ */
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ============ 3D tilt effect (mouse-tracked) ============ */
+  const initTilt = (selector, maxTilt = 8) => {
+    document.querySelectorAll(selector).forEach(el => {
+      el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const rotateX = ((y - rect.height / 2) / (rect.height / 2)) * -maxTilt;
+        const rotateY = ((x - rect.width / 2) / (rect.width / 2)) * maxTilt;
+        el.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.transform = 'rotateX(0deg) rotateY(0deg)';
+      });
+    });
+  };
+
+  initTilt('.project-card', 6);
+  initTilt('.about__image-wrap', 8);
 
 });
