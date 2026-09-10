@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muhammad Ahmad — Aspiring Data Scientist</title>
+  <meta name="description" content="Portfolio of Muhammad Ahmad, Software Engineering student building skills in data science and AI.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <header class="nav" id="nav">
+    <div class="nav__inner container">
+      <a href="#home" class="nav__logo">MA<span class="nav__logo-dot">.</span></a>
+
+      <nav class="nav__links" id="navLinks">
+        <a href="#about" class="nav__link">About</a>
+        <a href="#skills" class="nav__link">Skills</a>
+        <a href="#education" class="nav__link">Education</a>
+        <a href="#projects" class="nav__link">Projects</a>
+        <a href="#experience" class="nav__link">Experience</a>
+        <a href="#contact" class="nav__link">Contact</a>
+      </nav>
+
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <div class="hero__grid-bg" aria-hidden="true"></div>
+
+    <div class="container hero__inner">
+      <div class="hero__text">
+        <p class="hero__kicker">Software Engineering Student · Learning Data Science</p>
+        <h1 class="hero__title">
+          Data science —<br> one dataset,<br> one model at a time.
+        </h1>
+        <p class="hero__desc">
+          I'm <strong>Muhammad Ahmad</strong> — a 3rd-semester Software
+          Engineering student building a strong foundation in data science,
+          from cleaning messy data to training machine learning models.
+        </p>
+        <div class="hero__cta">
+          <a href="#projects" class="btn btn--primary">See my work</a>
+          <a href="#contact" class="btn btn--ghost">Get in touch</a>
+        </div>
+
+        <div class="hero__social">
+          <a href="https://github.com/yourusername" target="_blank" rel="noopener" aria-label="GitHub profile" class="social-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.72.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.27 5.69.42.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .3.2.66.79.55A10.51 10.51 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5Z"/></svg>
+          </a>
+          <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener" aria-label="LinkedIn profile" class="social-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM.5 8.75h8.96V23.5H.5V8.75Zm8.02 0h8.6v2.01h.12c1.2-2.14 4.13-4.39 8.5-4.39 9.1 0 10.78 5.99 10.78 13.78V23.5h-8.96v-6.5c0-1.55-.03-3.55-2.16-3.55-2.16 0-2.49 1.69-2.49 3.43v6.62H8.52V8.75Z" transform="scale(0.86)"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero__visual" aria-hidden="true">
+        <svg class="hero__chart" viewBox="0 0 420 320" xmlns="http://www.w3.org/2000/svg">
+          <!-- axes -->
+          <line x1="40" y1="20" x2="40" y2="280" class="chart__axis"/>
+          <line x1="40" y1="280" x2="400" y2="280" class="chart__axis"/>
+
+          <!-- trend line -->
+          <polyline class="chart__line" points="40,240 90,210 140,225 190,150 240,170 290,100 340,120 390,60" />
+
+          <!-- scatter points -->
+          <circle class="chart__dot" cx="90" cy="210" r="5" style="--d:0"/>
+          <circle class="chart__dot" cx="140" cy="225" r="5" style="--d:1"/>
+          <circle class="chart__dot" cx="190" cy="150" r="5" style="--d:2"/>
+          <circle class="chart__dot" cx="240" cy="170" r="5" style="--d:3"/>
+          <circle class="chart__dot" cx="290" cy="100" r="5" style="--d:4"/>
+          <circle class="chart__dot" cx="340" cy="120" r="5" style="--d:5"/>
+          <circle class="chart__dot" cx="390" cy="60" r="6" style="--d:6"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="about" id="about">
+    <div class="container about__grid">
+      <div class="about__image-wrap">
+        <img src="images/profile.jpg" alt="Your Name" class="about__image" onerror="this.src='https://via.placeholder.com/420x520/161b24/8891a3?text=Add+images%2Fprofile.jpg'">
+      </div>
+
+      <div class="about__content">
+        <h2 class="section-title">About</h2>
+        <p>
+          I'm currently in my 3rd semester of a Software Engineering degree,
+          and alongside my coursework I've been teaching myself data science —
+          starting with Python, NumPy and Pandas, moving into data cleaning
+          and visualization, and now working through machine learning:
+          supervised algorithms first, and unsupervised learning at the moment.
+        </p>
+        <p>
+          I also work comfortably with HTML, CSS and JavaScript, and use Excel
+          for quick analysis. Beyond the technical side, I bring strong
+          communication skills to how I explain and present findings, and I'm
+          actively exploring applied AI — agentic AI, generative AI, and RAG
+          (retrieval-augmented generation) — to understand where the field is
+          heading next.
+        </p>
+
+        <div class="about__stats">
+          <div class="stat">
+            <span class="stat__num" data-count="3">0</span>
+            <span class="stat__label">current semester</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num" data-count="9">0</span>
+            <span class="stat__label">tools &amp; skills learned</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num" data-count="10">0</span>
+            <span class="stat__label">practice projects</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EDUCATION ===== -->
+  <section class="education" id="education">
+    <div class="container">
+      <h2 class="section-title">Education</h2>
+
+      <div class="edu-card">
+        <div class="edu-card__main">
+          <h3 class="edu-card__degree">BS Software Engineering</h3>
+          <p class="edu-card__school">Your University Name</p>
+        </div>
+        <div class="edu-card__meta">
+          <span class="edu-card__date">2024 — 2028 (Expected)</span>
+          <span class="edu-card__status">3rd Semester</span>
+        </div>
+        <p class="edu-card__note">
+          Alongside core coursework — programming fundamentals, data
+          structures, OOP and databases — I'm self-studying data science and
+          applied AI to build a specialization on top of my degree.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SKILLS ===== -->
+  <section class="skills" id="skills">
+    <div class="container">
+      <h2 class="section-title">Skills</h2>
+
+      <div class="skills__grid">
+        <div class="skill-group">
+          <h3 class="skill-group__title">Programming</h3>
+          <div class="skill-bar"><span class="skill-bar__label">Python</span>
+            <div class="skill-bar__track"><div class="skill-bar__fill" style="--pct:78%"></div></div>
+          </div>
+          <div class="skill-bar"><span class="skill-bar__label">HTML / CSS / JavaScript</span>
+            <div class="skill-bar__track"><div class="skill-bar__fill" style="--pct:70%"></div></div>
+          </div>
+          <div class="skill-bar"><span class="skill-bar__label">Excel</span>
+            <div class="skill-bar__track"><div class="skill-bar__fill" style="--pct:75%"></div></div>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h3 class="skill-group__title">Data Science</h3>
+          <div class="skill-bar"><span class="skill-bar__label">NumPy &amp; Pandas</span>
+            <div class="skill-bar__track"><div class="skill-bar__fill" style="--pct:80%"></div></div>
+          </div>
+          <div class="skill-bar"><span class="skill-bar__label">Data Cleaning</span>
+            <div class="skill-bar__track"><div class="skill-bar__fill" style="--pct:78%"></div></div>
+          </div>
+          <div class="skill-bar"><span class="skill-bar__label">Data Visualization</span>
+            <div class="skill-bar__track"><div class="skill-bar__fill" style="--pct:72%"></div></div>
+          </div>
+          <div class="skill-bar"><span class="skill-bar__label">Machine Learning (Supervised)</span>
+            <div class="skill-bar__track"><div class="skill-bar__fill" style="--pct:62%"></div></div>
+          </div>
+          <div class="skill-bar"><span class="skill-bar__label">Unsupervised Learning <em style="font-style:normal;color:var(--text-muted);font-size:0.78rem;">(in progress)</em></span>
+            <div class="skill-bar__track"><div class="skill-bar__fill" style="--pct:40%"></div></div>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h3 class="skill-group__title">AI &amp; Soft Skills</h3>
+          <div class="skill-bar"><span class="skill-bar__label">Communication</span>
+            <div class="skill-bar__track"><div class="skill-bar__fill" style="--pct:85%"></div></div>
+          </div>
+          <div class="skill-bar"><span class="skill-bar__label">Generative AI / Agentic AI</span>
+            <div class="skill-bar__track"><div class="skill-bar__fill" style="--pct:50%"></div></div>
+          </div>
+          <div class="skill-bar"><span class="skill-bar__label">RAG (Retrieval-Augmented Generation)</span>
+            <div class="skill-bar__track"><div class="skill-bar__fill" style="--pct:45%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROJECTS ===== -->
+  <section class="projects" id="projects">
+    <div class="container">
+      <h2 class="section-title">Projects</h2>
+
+      <div class="projects__grid">
+        <article class="project-card">
+          <div class="project-card__image-wrap">
+            <img src="images/project1.jpg" alt="Data cleaning and EDA project" onerror="this.src='https://via.placeholder.com/500x300/161b24/8891a3?text=images%2Fproject1.jpg'">
+          </div>
+          <div class="project-card__body">
+            <h3 class="project-card__title">Titanic Dataset — Cleaning &amp; EDA</h3>
+            <p class="project-card__desc">
+              Cleaned missing and inconsistent data, then explored survival
+              patterns across age, class and gender using Pandas and
+              visualization libraries.
+            </p>
+            <div class="project-card__tags">
+              <span>Python</span><span>Pandas</span><span>Matplotlib</span>
+            </div>
+            <a href="#" class="project-card__link">View on GitHub</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-card__image-wrap">
+            <img src="images/project2.jpg" alt="Customer segmentation clustering project" onerror="this.src='https://via.placeholder.com/500x300/161b24/8891a3?text=images%2Fproject2.jpg'">
+          </div>
+          <div class="project-card__body">
+            <h3 class="project-card__title">Customer Segmentation with K-Means</h3>
+            <p class="project-card__desc">
+              Applied unsupervised clustering to group customers by
+              purchasing behavior — my first hands-on unsupervised
+              learning project.
+            </p>
+            <div class="project-card__tags">
+              <span>Python</span><span>Scikit-learn</span><span>K-Means</span>
+            </div>
+            <a href="#" class="project-card__link">View on GitHub</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-card__image-wrap">
+            <img src="images/project3.jpg" alt="Sales data visualization dashboard project" onerror="this.src='https://via.placeholder.com/500x300/161b24/8891a3?text=images%2Fproject3.jpg'">
+          </div>
+          <div class="project-card__body">
+            <h3 class="project-card__title">Sales Data Visualization</h3>
+            <p class="project-card__desc">
+              Built a set of charts and summary statistics from a raw sales
+              dataset to practice turning numbers into a clear story.
+            </p>
+            <div class="project-card__tags">
+              <span>Python</span><span>NumPy</span><span>Seaborn</span>
+            </div>
+            <a href="#" class="project-card__link">View on GitHub</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EXPERIENCE ===== -->
+  <section class="experience" id="experience">
+    <div class="container">
+      <h2 class="section-title">Experience</h2>
+
+      <div class="timeline">
+        <div class="timeline__item">
+          <div class="timeline__marker"></div>
+          <div class="timeline__content">
+            <span class="timeline__date">2026 — Present</span>
+            <h3 class="timeline__role">Unsupervised Learning &amp; Applied AI</h3>
+            <p>Studying clustering and dimensionality reduction, while
+              exploring agentic AI, generative AI, and RAG systems on the side.</p>
+          </div>
+        </div>
+
+        <div class="timeline__item">
+          <div class="timeline__marker"></div>
+          <div class="timeline__content">
+            <span class="timeline__date">Semester 2 — 3</span>
+            <h3 class="timeline__role">Data Science Foundations</h3>
+            <p>Learned Python, NumPy, Pandas, data cleaning and data
+              visualization, then moved into supervised machine learning.</p>
+          </div>
+        </div>
+
+        <div class="timeline__item">
+          <div class="timeline__marker"></div>
+          <div class="timeline__content">
+            <span class="timeline__date">Semester 1</span>
+            <h3 class="timeline__role">Self-Taught Web Fundamentals</h3>
+            <p>Built small static pages while learning HTML, CSS and
+              JavaScript on my own, ahead of formal coursework.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="contact" id="contact">
+    <div class="container contact__inner">
+      <div class="contact__text">
+        <h2 class="section-title">Let's talk</h2>
+        <p>Have a dataset that needs answers, or a role that needs a data
+          scientist? I'd like to hear about it.</p>
+        <ul class="contact__list">
+          <li><span>Email</span><a href="mailto:you@example.com">you@example.com</a></li>
+          <li><span>LinkedIn</span><a href="#" target="_blank" rel="noopener">linkedin.com/in/yourname</a></li>
+          <li><span>GitHub</span><a href="#" target="_blank" rel="noopener">github.com/yourname</a></li>
+        </ul>
+      </div>
+
+      <form class="contact__form" id="contactForm">
+        <div class="form-field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary btn--full">Send message</button>
+        <p class="form-status" id="formStatus"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© <span id="year"></span> Your Name. Built with HTML, CSS &amp; JS.</p>
+      <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
