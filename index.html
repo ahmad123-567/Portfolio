@@ -1,347 +1,377 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Muhammad Ahmad — Aspiring Data Scientist</title>
-  <meta name="description" content="Portfolio of Muhammad Ahmad, Software Engineering student building skills in data science and AI.">
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Ahmad | Software Engineer & Data Scientist</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- ScrollReveal for smooth scroll effects -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <!-- Three.js for 3D Particle Background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Vanilla Tilt for 3D Card effect -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandBg: '#0b0416',       // Deep Purple / Obsidian
+                        brandCard: '#130a24',     // Dark Violet Card
+                        brandAccent: '#10b981',   // Emerald Green
+                        brandPrimary: '#d946ef',  // Cyber Magenta
+                        brandText: '#f8fafc'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* 3D Glassmorphic Cards with Neon Shadow */
+        .glass-card {
+            background: rgba(19, 10, 36, 0.65);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(217, 70, 239, 0.15);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        .glow-hover:hover {
+            box-shadow: 0 0 25px rgba(217, 70, 239, 0.25), 0 0 15px rgba(16, 185, 129, 0.15);
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+        /* Gradient and blur details */
+        .cyber-gradient {
+            background: linear-gradient(135deg, #d946ef 0%, #10b981 100%);
+        }
+        /* Custom Background Canvas Overlay */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: auto;
+        }
+        /* Mesh grid overlay for that tech 3D look */
+        .tech-grid {
+            background-image: linear-gradient(rgba(217, 70, 239, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(217, 70, 239, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-brandBg text-brandText font-sans antialiased selection:bg-brandPrimary selection:text-white relative overflow-x-hidden">
 
-  <!-- ===== NAVIGATION ===== -->
-  <header class="nav" id="nav">
-    <div class="nav__inner container">
-      <a href="#home" class="nav__logo">MA<span class="nav__logo-dot">.</span></a>
+    <!-- Interactive 3D Background Canvas -->
+    <canvas id="bg-canvas"></canvas>
+    
+    <!-- Tech Grid Overlay -->
+    <div class="fixed inset-0 tech-grid pointer-events-none z-0"></div>
 
-      <nav class="nav__links" id="navLinks">
-        <a href="#about" class="nav__link">About</a>
-        <a href="#skills" class="nav__link">Skills</a>
-        <a href="#education" class="nav__link">Education</a>
-        <a href="#projects" class="nav__link">Projects</a>
-        <a href="#experience" class="nav__link">Experience</a>
-        <a href="#contact" class="nav__link">Contact</a>
-      </nav>
-
-      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
-
-  <!-- ===== HERO ===== -->
-  <section class="hero" id="home">
-    <div class="hero__grid-bg" aria-hidden="true"></div>
-
-    <div class="container hero__inner">
-      <div class="hero__text">
-        <div class="hero__avatar">
-          <img src="images/profile.jpg" alt="Muhammad Ahmad" onerror="this.src='https://via.placeholder.com/160x160/161b24/8891a3?text=Add+photo'">
-        </div>
-        <p class="hero__kicker">Software Engineering Student · Learning Data Science</p>
-        <h1 class="hero__title">
-          Data science —<br> one dataset,<br> one model at a time.
-        </h1>
-        <p class="hero__desc">
-          I'm <strong>Muhammad Ahmad</strong> — a 3rd-semester Software
-          Engineering student building a strong foundation in data science,
-          from cleaning messy data to training machine learning models.
-        </p>
-        <div class="hero__cta">
-          <a href="#projects" class="btn btn--primary">See my work</a>
-          <a href="#contact" class="btn btn--ghost">Get in touch</a>
-        </div>
-
-        <div class="hero__social">
-          <a href="https://github.com/yourusername" target="_blank" rel="noopener" aria-label="GitHub profile" class="social-icon">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.72.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.27 5.69.42.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .3.2.66.79.55A10.51 10.51 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5Z"/></svg>
-          </a>
-          <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener" aria-label="LinkedIn profile" class="social-icon">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM.5 8.75h8.96V23.5H.5V8.75Zm8.02 0h8.6v2.01h.12c1.2-2.14 4.13-4.39 8.5-4.39 9.1 0 10.78 5.99 10.78 13.78V23.5h-8.96v-6.5c0-1.55-.03-3.55-2.16-3.55-2.16 0-2.49 1.69-2.49 3.43v6.62H8.52V8.75Z" transform="scale(0.86)"/></svg>
-          </a>
-        </div>
-      </div>
-
-      <div class="hero__visual" aria-hidden="true">
-        <svg class="hero__chart" viewBox="0 0 420 320" xmlns="http://www.w3.org/2000/svg">
-          <!-- axes -->
-          <line x1="40" y1="20" x2="40" y2="280" class="chart__axis"/>
-          <line x1="40" y1="280" x2="400" y2="280" class="chart__axis"/>
-
-          <!-- trend line -->
-          <polyline class="chart__line" points="40,240 90,210 140,225 190,150 240,170 290,100 340,120 390,60" />
-
-          <!-- scatter points -->
-          <circle class="chart__dot" cx="90" cy="210" r="5" style="--d:0"/>
-          <circle class="chart__dot" cx="140" cy="225" r="5" style="--d:1"/>
-          <circle class="chart__dot" cx="190" cy="150" r="5" style="--d:2"/>
-          <circle class="chart__dot" cx="240" cy="170" r="5" style="--d:3"/>
-          <circle class="chart__dot" cx="290" cy="100" r="5" style="--d:4"/>
-          <circle class="chart__dot" cx="340" cy="120" r="5" style="--d:5"/>
-          <circle class="chart__dot" cx="390" cy="60" r="6" style="--d:6"/>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== ABOUT ===== -->
-  <section class="about" id="about">
-    <div class="container about__grid">
-      <div class="about__image-wrap">
-        <img src="images/profile.jpg" alt="Your Name" class="about__image" onerror="this.src='https://via.placeholder.com/420x520/161b24/8891a3?text=Add+images%2Fprofile.jpg'">
-      </div>
-
-      <div class="about__content">
-        <h2 class="section-title">About</h2>
-        <p>
-          I'm currently in my 3rd semester of a Software Engineering degree,
-          and alongside my coursework I've been teaching myself data science —
-          starting with Python, NumPy and Pandas, moving into data cleaning
-          and visualization, and now working through machine learning:
-          supervised algorithms first, and unsupervised learning at the moment.
-        </p>
-        <p>
-          I also work comfortably with HTML, CSS and JavaScript, and use Excel
-          for quick analysis. Beyond the technical side, I bring strong
-          communication skills to how I explain and present findings, and I'm
-          actively exploring applied AI — agentic AI, generative AI, and RAG
-          (retrieval-augmented generation) — to understand where the field is
-          heading next.
-        </p>
-
-        <div class="about__stats">
-          <div class="stat">
-            <span class="stat__num" data-count="3">0</span>
-            <span class="stat__label">current semester</span>
-          </div>
-          <div class="stat">
-            <span class="stat__num" data-count="9">0</span>
-            <span class="stat__label">tools &amp; skills learned</span>
-          </div>
-          <div class="stat">
-            <span class="stat__num" data-count="10">0</span>
-            <span class="stat__label">practice projects</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== EDUCATION ===== -->
-  <section class="education" id="education">
-    <div class="container">
-      <h2 class="section-title">Education</h2>
-
-      <div class="edu-card">
-        <div class="edu-card__main">
-          <h3 class="edu-card__degree">BS Software Engineering</h3>
-          <p class="edu-card__school">Your University Name</p>
-        </div>
-        <div class="edu-card__meta">
-          <span class="edu-card__date">2024 — 2028 (Expected)</span>
-          <span class="edu-card__status">3rd Semester</span>
-        </div>
-        <p class="edu-card__note">
-          Alongside core coursework — programming fundamentals, data
-          structures, OOP and databases — I'm self-studying data science and
-          applied AI to build a specialization on top of my degree.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== SKILLS ===== -->
-  <section class="skills" id="skills">
-    <div class="container">
-      <h2 class="section-title">Skills</h2>
-
-      <div class="skills__grid">
-        <div class="skill-group">
-          <h3 class="skill-group__title">Programming</h3>
-          <div class="skill-pills">
-            <span class="skill-pill">Python</span>
-            <span class="skill-pill">HTML</span>
-            <span class="skill-pill">CSS</span>
-            <span class="skill-pill">JavaScript</span>
-            <span class="skill-pill">Excel</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <h3 class="skill-group__title">Data Science</h3>
-          <div class="skill-pills">
-            <span class="skill-pill">NumPy</span>
-            <span class="skill-pill">Pandas</span>
-            <span class="skill-pill">Data Cleaning</span>
-            <span class="skill-pill">Data Visualization</span>
-            <span class="skill-pill">Machine Learning</span>
-            <span class="skill-pill skill-pill--learning">Unsupervised Learning</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <h3 class="skill-group__title">AI &amp; Soft Skills</h3>
-          <div class="skill-pills">
-            <span class="skill-pill">Communication</span>
-            <span class="skill-pill">Problem Solving</span>
-            <span class="skill-pill skill-pill--learning">Generative AI</span>
-            <span class="skill-pill skill-pill--learning">Agentic AI</span>
-            <span class="skill-pill skill-pill--learning">RAG</span>
-          </div>
-        </div>
-      </div>
-
-      <p class="skills__legend"><span class="legend-dot"></span> Currently learning</p>
-    </div>
-  </section>
-
-  <!-- ===== PROJECTS ===== -->
-  <section class="projects" id="projects">
-    <div class="container">
-      <h2 class="section-title">Projects</h2>
-
-      <div class="projects__grid">
-        <article class="project-card">
-          <div class="project-card__image-wrap">
-            <img src="images/project1.jpg" alt="Data cleaning and EDA project" onerror="this.src='https://via.placeholder.com/500x300/161b24/8891a3?text=images%2Fproject1.jpg'">
-          </div>
-          <div class="project-card__body">
-            <h3 class="project-card__title">Titanic Dataset — Cleaning &amp; EDA</h3>
-            <p class="project-card__desc">
-              Cleaned missing and inconsistent data, then explored survival
-              patterns across age, class and gender using Pandas and
-              visualization libraries.
-            </p>
-            <div class="project-card__tags">
-              <span>Python</span><span>Pandas</span><span>Matplotlib</span>
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass-card border-b border-white/5">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#hero" class="text-xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-brandPrimary to-brandAccent">MA.</a>
+            <div class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#about" class="hover:text-brandAccent transition-colors">About</a>
+                <a href="#skills" class="hover:text-brandAccent transition-colors">Skills</a>
+                <a href="#experience" class="hover:text-brandAccent transition-colors">Experience</a>
+                <a href="#projects" class="hover:text-brandAccent transition-colors">Projects</a>
+                <a href="#education" class="hover:text-brandAccent transition-colors">Education</a>
+                <a href="#contact" class="hover:text-brandAccent transition-colors">Contact</a>
             </div>
-            <a href="#" class="project-card__link">View on GitHub</a>
-          </div>
-        </article>
+        </div>
+    </nav>
 
-        <article class="project-card">
-          <div class="project-card__image-wrap">
-            <img src="images/project2.jpg" alt="Customer segmentation clustering project" onerror="this.src='https://via.placeholder.com/500x300/161b24/8891a3?text=images%2Fproject2.jpg'">
-          </div>
-          <div class="project-card__body">
-            <h3 class="project-card__title">Customer Segmentation with K-Means</h3>
-            <p class="project-card__desc">
-              Applied unsupervised clustering to group customers by
-              purchasing behavior — my first hands-on unsupervised
-              learning project.
-            </p>
-            <div class="project-card__tags">
-              <span>Python</span><span>Scikit-learn</span><span>K-Means</span>
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center justify-center pt-20 px-6 relative z-10">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div class="reveal-left" data-tilt data-tilt-max="5" data-tilt-speed="400">
+                <span class="text-brandAccent text-sm tracking-widest font-semibold uppercase">5th Semester Software Engineering Student</span>
+                <h1 class="text-4xl md:text-6xl font-extrabold mt-2 leading-tight">
+                    Hi, I'm <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-brandPrimary to-brandAccent">Muhammad Ahmad</span>
+                </h1>
+                <p class="mt-4 text-slate-300 text-base md:text-lg max-w-lg">
+                    Passionate about Software Development, Data Science, Data Visualization, and Intelligent Agentic AI Solutions.
+                </p>
+                <div class="mt-8 flex flex-wrap gap-4">
+                    <a href="#projects" class="bg-gradient-to-r from-brandPrimary to-brandAccent text-slate-900 font-bold px-6 py-3 rounded-lg hover:brightness-110 transition-all shadow-lg shadow-brandPrimary/20">
+                        View Projects
+                    </a>
+                    <a href="#contact" class="border border-brandPrimary/40 px-6 py-3 rounded-lg hover:border-brandAccent hover:text-brandAccent transition-all glass-card">
+                        Contact Me
+                    </a>
+                </div>
             </div>
-            <a href="#" class="project-card__link">View on GitHub</a>
-          </div>
-        </article>
-
-        <article class="project-card">
-          <div class="project-card__image-wrap">
-            <img src="images/project3.jpg" alt="Sales data visualization dashboard project" onerror="this.src='https://via.placeholder.com/500x300/161b24/8891a3?text=images%2Fproject3.jpg'">
-          </div>
-          <div class="project-card__body">
-            <h3 class="project-card__title">Sales Data Visualization</h3>
-            <p class="project-card__desc">
-              Built a set of charts and summary statistics from a raw sales
-              dataset to practice turning numbers into a clear story.
-            </p>
-            <div class="project-card__tags">
-              <span>Python</span><span>NumPy</span><span>Seaborn</span>
+            
+            <div class="reveal-right flex justify-center">
+                <!-- 3D Halo Frame with Image -->
+                <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full p-2 bg-gradient-to-tr from-brandPrimary via-transparent to-brandAccent shadow-2xl animate-pulse" data-tilt data-tilt-scale="1.05">
+                    <div class="absolute inset-0 rounded-full border-2 border-brandPrimary/30 blur-md animate-ping"></div>
+                    <img src="https://via.placeholder.com/400" alt="Muhammad Ahmad" class="w-full h-full object-cover rounded-full border-4 border-brandBg z-10 relative">
+                </div>
             </div>
-            <a href="#" class="project-card__link">View on GitHub</a>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== EXPERIENCE ===== -->
-  <section class="experience" id="experience">
-    <div class="container">
-      <h2 class="section-title">Experience</h2>
-
-      <div class="timeline">
-        <div class="timeline__item">
-          <div class="timeline__marker"></div>
-          <div class="timeline__content">
-            <span class="timeline__date">2026 — Present</span>
-            <h3 class="timeline__role">Unsupervised Learning &amp; Applied AI</h3>
-            <p>Studying clustering and dimensionality reduction, while
-              exploring agentic AI, generative AI, and RAG systems on the side.</p>
-          </div>
         </div>
+    </section>
 
-        <div class="timeline__item">
-          <div class="timeline__marker"></div>
-          <div class="timeline__content">
-            <span class="timeline__date">Semester 2 — 3</span>
-            <h3 class="timeline__role">Data Science Foundations</h3>
-            <p>Learned Python, NumPy, Pandas, data cleaning and data
-              visualization, then moved into supervised machine learning.</p>
-          </div>
+    <!-- About Section -->
+    <section id="about" class="py-24 px-6 relative z-10">
+        <div class="max-w-4xl mx-auto text-center reveal-up glass-card p-12 rounded-2xl border border-brandPrimary/10">
+            <h2 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brandPrimary to-brandAccent">About Me</h2>
+            <p class="mt-6 text-slate-300 leading-relaxed text-lg">
+                I am currently in my 5th semester pursuing a Bachelor's degree in Software Engineering. I specialize in building efficient software architectures, visualizing complex datasets, and building AI agents. Driven by continuous learning, I bridging the gap between raw data analytics and modern software engineering.
+            </p>
         </div>
+    </section>
 
-        <div class="timeline__item">
-          <div class="timeline__marker"></div>
-          <div class="timeline__content">
-            <span class="timeline__date">Semester 1</span>
-            <h3 class="timeline__role">Self-Taught Web Fundamentals</h3>
-            <p>Built small static pages while learning HTML, CSS and
-              JavaScript on my own, ahead of formal coursework.</p>
-          </div>
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 px-6 relative z-10">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-brandPrimary to-brandAccent mb-16 reveal-up">Skills & Technologies</h2>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+                <!-- Skill cards have vanilla-tilt for 3D Interactive movement -->
+                <div class="glass-card p-6 rounded-xl text-center glow-hover transition-all reveal-up cursor-pointer" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+                    <i class="fa-brands fa-python text-5xl text-brandPrimary mb-4"></i>
+                    <h3 class="font-bold text-lg">Python</h3>
+                </div>
+                <div class="glass-card p-6 rounded-xl text-center glow-hover transition-all reveal-up cursor-pointer" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+                    <i class="fa-solid fa-code text-5xl text-brandAccent mb-4"></i>
+                    <h3 class="font-bold text-lg">C++ / C#</h3>
+                </div>
+                <div class="glass-card p-6 rounded-xl text-center glow-hover transition-all reveal-up cursor-pointer" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+                    <i class="fa-brands fa-java text-5xl text-brandPrimary mb-4"></i>
+                    <h3 class="font-bold text-lg">Java</h3>
+                </div>
+                <div class="glass-card p-6 rounded-xl text-center glow-hover transition-all reveal-up cursor-pointer" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+                    <i class="fa-solid fa-database text-5xl text-brandAccent mb-4"></i>
+                    <h3 class="font-bold text-lg">MongoDB</h3>
+                </div>
+                <div class="glass-card p-6 rounded-xl text-center glow-hover transition-all reveal-up cursor-pointer" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+                    <i class="fa-brands fa-html5 text-5xl text-brandPrimary mb-4"></i>
+                    <h3 class="font-bold text-lg">HTML5 / CSS3</h3>
+                </div>
+                <div class="glass-card p-6 rounded-xl text-center glow-hover transition-all reveal-up cursor-pointer" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+                    <i class="fa-solid fa-chart-pie text-5xl text-brandAccent mb-4"></i>
+                    <h3 class="font-bold text-lg">Data Science & Analytics</h3>
+                </div>
+                <div class="glass-card p-6 rounded-xl text-center glow-hover transition-all reveal-up cursor-pointer" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+                    <i class="fa-solid fa-brain text-5xl text-brandPrimary mb-4"></i>
+                    <h3 class="font-bold text-lg">Agentic AI</h3>
+                </div>
+                <div class="glass-card p-6 rounded-xl text-center glow-hover transition-all reveal-up cursor-pointer" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+                    <i class="fa-solid fa-file-excel text-5xl text-brandAccent mb-4"></i>
+                    <h3 class="font-bold text-lg">MS Excel</h3>
+                </div>
+            </div>
+            
+            <div class="mt-8 glass-card p-8 rounded-2xl text-center border-l-4 border-r-4 border-brandPrimary reveal-up" data-tilt>
+                <h4 class="text-brandAccent font-bold text-xl mb-2">Soft Skills & Expertise</h4>
+                <p class="text-slate-300 text-base md:text-lg">Effective Communication, Problem Solving, Team Leadership, Critical Thinking, Generative AI Agent Engineering</p>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== CONTACT ===== -->
-  <section class="contact" id="contact">
-    <div class="container contact__inner">
-      <div class="contact__text">
-        <h2 class="section-title">Let's talk</h2>
-        <p>Have a dataset that needs answers, or a role that needs a data
-          scientist? I'd like to hear about it.</p>
-        <ul class="contact__list">
-          <li><span>Email</span><a href="mailto:you@example.com">you@example.com</a></li>
-          <li><span>LinkedIn</span><a href="#" target="_blank" rel="noopener">linkedin.com/in/yourname</a></li>
-          <li><span>GitHub</span><a href="#" target="_blank" rel="noopener">github.com/yourname</a></li>
-        </ul>
-      </div>
-
-      <form class="contact__form" id="contactForm">
-        <div class="form-field">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" required>
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 px-6 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-brandPrimary to-brandAccent mb-16 reveal-up">Experience</h2>
+            <div class="space-y-8">
+                <div class="glass-card p-8 rounded-xl border-l-4 border-brandPrimary reveal-left" data-tilt>
+                    <span class="text-xs text-brandAccent font-mono uppercase tracking-wider">Academic & Practical Projects</span>
+                    <h3 class="text-2xl font-bold mt-1 text-brandPrimary">Software Development & Data Engineering</h3>
+                    <p class="text-slate-400 text-base mt-4 leading-relaxed">
+                        Designed, structured, and implemented multi-tier software architectures using C++, Java, and Python. Developed specialized script pipelines for complex data cleaning, exploratory visual modeling, and automated agents.
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="form-field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-field">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="4" required></textarea>
-        </div>
-        <button type="submit" class="btn btn--primary btn--full">Send message</button>
-        <p class="form-status" id="formStatus"></p>
-      </form>
-    </div>
-  </section>
+    </section>
 
-  <footer class="footer">
-    <div class="container footer__inner">
-      <p>© <span id="year"></span> Your Name. Built with HTML, CSS &amp; JS.</p>
-      <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
-    </div>
-  </footer>
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 px-6 relative z-10">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-brandPrimary to-brandAccent mb-16 reveal-up">Featured Projects</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                
+                <!-- Project 1 -->
+                <div class="glass-card rounded-2xl overflow-hidden glow-hover transition-all reveal-up" data-tilt data-tilt-scale="1.01">
+                    <div class="relative overflow-hidden group">
+                        <img src="https://via.placeholder.com/600x320" alt="Project 1" class="w-full h-52 object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brandBg to-transparent opacity-80"></div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-brandPrimary">Data Visualization Dashboard</h3>
+                        <p class="text-slate-400 text-sm mt-3 leading-relaxed">Interactive processing dashboard visualization engine for handling large scale dataset metrics using custom Python and visual math libs.</p>
+                        <div class="mt-6">
+                            <a href="https://github.com/yourusername/project1" target="_blank" class="text-brandAccent hover:text-brandPrimary hover:underline text-sm font-semibold flex items-center gap-2 transition-colors">
+                                View GitHub Repo <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-  <script src="script.js"></script>
+                <!-- Project 2 -->
+                <div class="glass-card rounded-2xl overflow-hidden glow-hover transition-all reveal-up" data-tilt data-tilt-scale="1.01">
+                    <div class="relative overflow-hidden group">
+                        <img src="https://via.placeholder.com/600x320" alt="Project 2" class="w-full h-52 object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brandBg to-transparent opacity-80"></div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-brandAccent">Autonomous Agent Automation</h3>
+                        <p class="text-slate-400 text-sm mt-3 leading-relaxed">System automating dynamic task generation logic leveraging advanced LLM API pathways and robust custom MongoDB pipelines.</p>
+                        <div class="mt-6">
+                            <a href="https://github.com/yourusername/project2" target="_blank" class="text-brandAccent hover:text-brandPrimary hover:underline text-sm font-semibold flex items-center gap-2 transition-colors">
+                                View GitHub Repo <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-24 px-6 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-brandPrimary to-brandAccent mb-16 reveal-up">Education</h2>
+            <div class="glass-card p-8 rounded-2xl border-r-4 border-brandAccent reveal-right" data-tilt>
+                <span class="text-xs text-brandPrimary font-mono uppercase tracking-wider font-semibold">5th Semester Undergraduate</span>
+                <h3 class="text-2xl font-bold mt-2">Bachelor of Science in Software Engineering</h3>
+                <p class="text-slate-400 text-sm mt-2 leading-relaxed">Specializing in programming algorithms, modern databases, structural frameworks, exploratory data sciences, and generative agent systems.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6 relative z-10">
+        <div class="max-w-4xl mx-auto text-center reveal-up glass-card p-12 rounded-2xl border border-brandPrimary/10" data-tilt>
+            <h2 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brandPrimary to-brandAccent">Get In Touch</h2>
+            <p class="text-slate-300 mt-4 text-lg">Let’s collaborate on amazing 3D immersive web environments or data intelligence setups.</p>
+
+            <div class="mt-10 flex justify-center gap-6">
+                <a href="https://github.com/yourusername" target="_blank" class="glass-card p-5 rounded-full hover:text-brandAccent transition-colors glow-hover transform hover:-translate-y-1">
+                    <i class="fa-brands fa-github text-3xl"></i>
+                </a>
+                <a href="https://linkedin.com/in/yourusername" target="_blank" class="glass-card p-5 rounded-full hover:text-brandAccent transition-colors glow-hover transform hover:-translate-y-1">
+                    <i class="fa-brands fa-linkedin text-3xl"></i>
+                </a>
+                <a href="mailto:your.email@example.com" class="glass-card p-5 rounded-full hover:text-brandAccent transition-colors glow-hover transform hover:-translate-y-1">
+                    <i class="fa-solid fa-envelope text-3xl"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-slate-500 text-sm glass-card border-t-0 relative z-10">
+        © 2026 Muhammad Ahmad. Crafted with futuristic Purple-Emerald vibes.
+    </footer>
+
+    <!-- Interactive 3D Setup & Scroll Animations Script -->
+    <script>
+        // Start ScrollReveal (Scroll animations)
+        ScrollReveal().reveal('.reveal-up', { origin: 'bottom', distance: '50px', duration: 1100, delay: 150, reset: false });
+        ScrollReveal().reveal('.reveal-left', { origin: 'left', distance: '60px', duration: 1100, delay: 150, reset: false });
+        ScrollReveal().reveal('.reveal-right', { origin: 'right', distance: '60px', duration: 1100, delay: 150, reset: false });
+
+        // Interactive 3D Particles in Background (THREE.JS)
+        const canvas = document.getElementById('bg-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // Create random particles
+        const particlesCount = 250;
+        const positions = new Float32Array(particlesCount * 3);
+        const colors = new Float32Array(particlesCount * 3);
+
+        const colorPalette = [
+            new THREE.Color('#d946ef'), // Magenta
+            new THREE.Color('#10b981'), // Emerald
+            new THREE.Color('#7c3aed')  // Deep Violet
+        ];
+
+        for (let i = 0; i < particlesCount * 3; i += 3) {
+            // Position
+            positions[i] = (Math.random() - 0.5) * 15;
+            positions[i + 1] = (Math.random() - 0.5) * 15;
+            positions[i + 2] = (Math.random() - 0.5) * 15;
+
+            // Color selection
+            const randomColor = colorPalette[Math.floor(Math.random() * colorPalette.length)];
+            colors[i] = randomColor.r;
+            colors[i + 1] = randomColor.g;
+            colors[i + 2] = randomColor.b;
+        }
+
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+        // Particle material
+        const material = new THREE.PointsMaterial({
+            size: 0.05,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.85,
+            blending: THREE.AdditiveBlending
+        });
+
+        const particles = new THREE.Points(geometry, material);
+        scene.add(particles);
+
+        camera.position.z = 5;
+
+        // Interaction coordinates (Mouse Move)
+        let mouseX = 0;
+        let mouseY = 0;
+
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX / window.innerWidth - 0.5) * 1.5;
+            mouseY = (event.clientY / window.innerHeight - 0.5) * 1.5;
+        });
+
+        // Loop animation
+        const animate = () => {
+            requestAnimationFrame(animate);
+
+            // Subtle rotation
+            particles.rotation.y += 0.001;
+            particles.rotation.x += 0.0005;
+
+            // Interact with cursor position
+            camera.position.x += (mouseX - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY - camera.position.y) * 0.05;
+
+            renderer.render(scene, camera);
+        };
+        animate();
+
+        // Responsive resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Initialize 3D Card tilting using VanillaTilt
+        VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+            max: 8,
+            speed: 500,
+            glare: true,
+            "max-glare": 0.2,
+        });
+    </script>
 </body>
 </html>
